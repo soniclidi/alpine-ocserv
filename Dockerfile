@@ -8,11 +8,14 @@ RUN buildDeps="xz openssl gcc autoconf make linux-headers"; \
 	set -x \
 	&& apk add $buildDeps \
 	&& cd \
-	&& OC_VERSION="ocserv-0.10.10" \
-	&& wget ftp://ftp.infradead.org/pub/ocserv/$OC_VERSION.tar.xz \
-	&& tar xJf $OC_VERSION.tar.xz \
-	&& rm -fr $OC_VERSION.tar.xz \
-	&& cd $OC_VERSION \
+	&& wget http://www.infradead.org/ocserv/download.htm -O download.html \
+	&& OC_VERSION=`sed -n 's/^.*version is <b>\(.*\)$/\1/p' download.html` \
+	&& OC_FILE="ocserv-"$OC_VERSION \
+	&& rm -fr download.html \
+	&& wget ftp://ftp.infradead.org/pub/ocserv/$OC_FILE.tar.xz \
+	&& tar xJf $OC_FILE.tar.xz \
+	&& rm -fr $OC_FILE.tar.xz \
+	&& cd $OC_FILE \
 	&& sed -i '/#define DEFAULT_CONFIG_ENTRIES /{s/96/200/}' src/vpn.h \
 	&& ./configure \
 	&& make -j"$(nproc)" \
@@ -20,7 +23,7 @@ RUN buildDeps="xz openssl gcc autoconf make linux-headers"; \
 	&& mkdir -p /etc/ocserv \
 	&& cp ./doc/sample.config /etc/ocserv/ocserv.conf \
 	&& cd \
-	&& rm -fr ./$OC_VERSION \
+	&& rm -fr ./$OC_FILE \
 	&& apk del --purge $buildDeps
 
 COPY cn-no-route.txt /tmp/
