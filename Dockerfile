@@ -8,7 +8,7 @@ RUN buildDeps="xz openssl gcc autoconf make linux-headers"; \
 	set -x \
 	&& apk add $buildDeps \
 	&& cd \
-	&& wget http://www.infradead.org/ocserv/download.htm -O download.html \
+	&& wget http://www.infradead.org/ocserv/download.html -O download.html \
 	&& OC_VERSION=`sed -n 's/^.*version is <b>\(.*\)$/\1/p' download.html` \
 	&& OC_FILE="ocserv-$OC_VERSION" \
 	&& rm -fr download.html \
