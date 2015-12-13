@@ -21,7 +21,7 @@ RUN buildDeps="xz openssl gcc autoconf make linux-headers"; \
 	&& cp ./doc/sample.config /etc/ocserv/ocserv.conf \
 	&& cd \
 	&& rm -fr ./$OC_VERSION \
-	&& apk dell --purge &buildDeps
+	&& apk del --purge $buildDeps
 
 COPY cn-no-route.txt /tmp/
 RUN set -x \
