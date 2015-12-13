@@ -6,7 +6,7 @@ RUN apk update && apk add musl-dev gnutls-dev readline-dev libnl3-dev lz4-dev li
 
 RUN buildDeps="xz openssl gcc autoconf make linux-headers"; \
 	set -x \
-	&& apk add $duildDeps \
+	&& apk add $buildDeps \
 	&& cd \
 	&& OC_VERSION="ocserv-0.10.10" \
 	&& wget ftp://ftp.infradead.org/pub/ocserv/$OC_VERSION.tar.xz \
