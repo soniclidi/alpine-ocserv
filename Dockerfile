@@ -1,4 +1,5 @@
 From alpine:latest
+MAINTAINER soniclidi
 
 RUN echo "@edge http://dl-4.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories
 RUN echo "@testing http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
